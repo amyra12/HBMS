@@ -129,13 +129,13 @@ class Ward extends StatelessWidget{
                             MaterialPageRoute(builder: (context) => W1B()), // Replace NextPage with your desired page
                           );
                         },
-                child: badges.Badge(
-                  position: badges.BadgePosition.topEnd(top: -10, end: 3),
-                  showBadge: true,
-                  ignorePointer: false,
-                  onTap: () {},
-                  badgeContent: Text(
-                    '1',
+                          child: badges.Badge(
+                            position: badges.BadgePosition.topEnd(top: -10, end: 3),
+                            showBadge: true,
+                            ignorePointer: false,
+                            onTap: () {},
+                            badgeContent: Text(
+                              '1',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,

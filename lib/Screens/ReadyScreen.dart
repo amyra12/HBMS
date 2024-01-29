@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../Bed.dart';
+import '../Model/BedStatusModel.dart';
+import '../Model/BedStatusModelW1GB2.dart';
 import '../widgets/sidemenu.dart';
 
 class ReadyScreen extends StatelessWidget{
@@ -10,6 +13,10 @@ class ReadyScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    BedStatusModel bedStatusModel = Provider.of<BedStatusModel>(context);
+
+    // Access the BedStatusModelW1GB2Provider
+    BedStatusModelW1GB2 bedStatusModelW1GB2 = Provider.of<BedStatusModelW1GB2>(context);
     return Scaffold(
       drawer: SideMenu(),
       appBar: AppBar(
@@ -81,14 +88,99 @@ class ReadyScreen extends StatelessWidget{
                   ],
                 ),
               ),
+
+
               SizedBox(height: 5),
 
-
-
-
-
-
-    ]
+              Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: ListView(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          children: [
+                            if (bedStatusModel.selectedStatus.text != 'Carbolised'&& bedStatusModel.selectedStatus.text != 'Occupied')
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.lightGreenAccent,
+                                  border: Border.all(
+                                    color: Colors.lightGreen,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: ListTile(
+                                  title: Text(
+                                    'GroundFloor, Ward 1, Bed 1',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  subtitle: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Status: ${bedStatusModel.selectedStatus.text}',
+                                      ),
+                                      Text(
+                                        'Patient Admit: ${bedStatusModel.selectedAdmitDate.toLocal().toString().split(' ')[0]}',
+                                      ),
+                                      Text(
+                                        'Patient Discharge: ${bedStatusModel.selectedDischargeDate.toLocal().toString().split(' ')[0]}',
+                                      ),
+                                      // Add more details from BedStatusModel as needed
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            SizedBox(height: 10),
+                            if (bedStatusModelW1GB2.selectedStatus.text != 'Carbolised' && bedStatusModelW1GB2.selectedStatus.text != 'Occupied')
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.lightGreenAccent,
+                                  border: Border.all(
+                                    color: Colors.lightGreen,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: ListTile(
+                                  title: Text(
+                                    'GroundFloor, Ward 1, Bed 2',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  subtitle: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Status: ${bedStatusModelW1GB2.selectedStatus.text}',
+                                      ),
+                                      Text(
+                                        'Patient Admit: ${bedStatusModelW1GB2.selectedAdmitDate.toLocal().toString().split(' ')[0]}',
+                                      ),
+                                      Text(
+                                        'Patient Discharge: ${bedStatusModelW1GB2.selectedDischargeDate.toLocal().toString().split(' ')[0]}',
+                                      ),
+                                      // Add more details from BedStatusModel as needed
+                                    ],
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+    ],
     ),
       ),
     );

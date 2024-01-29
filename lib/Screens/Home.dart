@@ -40,8 +40,26 @@ class HomeScreen extends StatelessWidget{
               ),
             ),
           ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.headset_mic, color: Colors.white), // Use your desired icon
+              onPressed: () {
+                // Add your customer service button action here
+                // For example, you can open a customer service screen or show a dialog
+                print("Customer service button pressed");
+              },
+            ),
+          ],
+
         ),
-        body: Container(
+        body: RefreshIndicator(
+          onRefresh: () async {
+          // Implement your refresh logic here
+          print("Pull-to-refresh initiated");
+          // You can call your async function to refresh data here
+          },
+
+          child: Container(
 
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -117,22 +135,19 @@ class HomeScreen extends StatelessWidget{
                 ),
               ),
 
-                Expanded(
-
-                  child: ListView(
-                    padding: EdgeInsets.all(30),
-
-                    children: [
-
-                      GridView(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 20,
-                          crossAxisSpacing: 20,
-
-                        ),
+              Expanded(
+                child: ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.all(30),
+                  children: [
+                    GridView(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 20,
+                        crossAxisSpacing: 20,
+                      ),
 
                         children: [
 
@@ -989,7 +1004,7 @@ class HomeScreen extends StatelessWidget{
         ),
     ),
     ),
-
+      )
     );
     }
 
